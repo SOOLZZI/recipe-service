@@ -1,6 +1,6 @@
 package com.haruhanjan.recipeservice.repository;
 
-import com.haruhanjan.recipeservice.domain.Recipe;
+import com.haruhanjan.recipeservice.entity.Recipe;
 
 import java.util.List;
 import java.util.Optional;

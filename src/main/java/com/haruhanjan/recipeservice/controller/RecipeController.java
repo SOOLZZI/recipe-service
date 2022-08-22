@@ -1,15 +1,15 @@
 package com.haruhanjan.recipeservice.controller;
 
-import com.haruhanjan.recipeservice.domain.Recipe;
+import com.haruhanjan.recipeservice.entity.Recipe;
 import com.haruhanjan.recipeservice.service.RecipeService;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class RecipeController {
 
     private final RecipeService recipeService;
@@ -26,7 +26,7 @@ public class RecipeController {
     @PostMapping("/recipes/new")
     public String create(RecipeForm form){
         Recipe recipe = new Recipe();
-        recipe.setRecipe(form.getRecipe());
+        //recipe.setRecipe(form.getRecipe());
 
         recipeService.write(recipe);
 

@@ -1,9 +1,11 @@
 package com.haruhanjan.recipeservice.repository;
 
-import com.haruhanjan.recipeservice.domain.Recipe;
+import com.haruhanjan.recipeservice.entity.Recipe;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Repository
 public class MemoryRecipeRepository implements RecipeRepository{
 
     private static Map<Long,Recipe> recipe = new HashMap<>();
