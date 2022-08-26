@@ -1,13 +1,13 @@
 package com.haruhanjan.recipeservice.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RecipeProcess {
 
     @Id
@@ -17,9 +17,18 @@ public class RecipeProcess {
 
     private Integer cookingOrder;
 
-    private String discription;
+    private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipe_id")
     private Recipe recipe;
+
+    @Builder
+    public RecipeProcess(Integer cookingOrder, String description, Recipe recipe) {
+        this.cookingOrder = cookingOrder;
+        this.description = description;
+        this.recipe = recipe;
+    }
+
 
 }

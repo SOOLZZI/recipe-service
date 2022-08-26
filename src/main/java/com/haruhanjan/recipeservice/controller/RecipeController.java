@@ -1,43 +1,30 @@
 package com.haruhanjan.recipeservice.controller;
 
-import com.haruhanjan.recipeservice.entity.Recipe;
+import com.haruhanjan.recipeservice.dto.recipe.CreateRecipeRequestDTO;
+import com.haruhanjan.recipeservice.dto.recipe.RecipeResponseDTO;
 import com.haruhanjan.recipeservice.service.RecipeService;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/recipes")
+@RequiredArgsConstructor
 public class RecipeController {
 
     private final RecipeService recipeService;
 
-    public RecipeController(RecipeService recipeService) {
-        this.recipeService = recipeService;
+    @PostMapping
+    public ResponseEntity<Long> create(@RequestBody CreateRecipeRequestDTO dto){
+        Long result = recipeService.save(dto);
+        return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/recipes/new")
-    public String createForm(){
-        return "recipes/createMemberForm";
-    }
-
-    @PostMapping("/recipes/new")
-    public String create(RecipeForm form){
-        Recipe recipe = new Recipe();
-        //recipe.setRecipe(form.getRecipe());
-
-        recipeService.write(recipe);
-
-        return "redirect:/";
-    }
-
-    @GetMapping("/recipes")
-    public String list(Model model){
-        List<Recipe> members = recipeService.findRecipes();
-        model.addAttribute("members", members);
-        return "members/memberList";
+    @GetMapping
+    public ResponseEntity<List<RecipeResponseDTO>> findAll( ){
+        return ResponseEntity.ok(recipeService.findAll());
     }
 
 }

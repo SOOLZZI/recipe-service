@@ -1,9 +1,12 @@
 package com.haruhanjan.recipeservice.service;
 
-import com.haruhanjan.recipeservice.dto.CreateRecipeRequestDTO;
-import com.haruhanjan.recipeservice.dto.RecipeResponseDTO;
+import com.haruhanjan.recipeservice.dto.recipe.CreateRecipeRequestDTO;
+import com.haruhanjan.recipeservice.dto.recipe.RecipeResponseDTO;
 import com.haruhanjan.recipeservice.entity.Recipe;
+import com.haruhanjan.recipeservice.entity.RecipeIngredient;
+import com.haruhanjan.recipeservice.entity.RecipeProcess;
 import com.haruhanjan.recipeservice.repository.IngredientRepository;
+import com.haruhanjan.recipeservice.repository.RecipeIngredientRepository;
 import com.haruhanjan.recipeservice.repository.RecipeProcessRepository;
 import com.haruhanjan.recipeservice.repository.RecipeRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,37 +14,46 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.util.stream.IntStream.*;
 
 @Service
 @RequiredArgsConstructor
 public class RecipeService {
     private final RecipeRepository recipeRepository;
     private final RecipeProcessRepository recipeProcessRepository;
+    private final IngredientRepository ingredientRepository;
+    private final RecipeIngredientRepository recipeIngredientRepository;
 
     // 레시피 작성
-    public Long create(CreateRecipeRequestDTO dto){
+    public Long save(CreateRecipeRequestDTO dto){
         Recipe recipe = dto.toEntity();
-        // RecipeIngredient 생성 TODO
-        dto.getIngredients()
-                .stream()
-                .map(ingredientRepository::findById)
-                .map(i -> i.orElseThrow(EntityNotFoundException::new))
-                .forEach(i -> recipe.getIngredients().add(i));
-
-
-        //recipe.getIngredients()
-        // RecipeProcess 생성 TODO
-
-        dto.getProcesses()
-                .stream()
-                .map(recipeProcessRepository::findById)
-
 
         recipeRepository.save(recipe);
+
+        saveRecipeIngredient(dto, recipe);
+        saveRecipeProcess(dto, recipe);
+
         return recipe.getId();
     }
+
+    private void saveRecipeProcess(CreateRecipeRequestDTO dto, Recipe recipe) {
+        List<String> processes = dto.getProcesses();
+        range(0,processes.size())
+                .mapToObj(i->
+                        new RecipeProcess(i+1, processes.get(i), recipe))
+                .forEach(recipeProcessRepository::save);
+    }
+
+    private void saveRecipeIngredient(CreateRecipeRequestDTO dto, Recipe recipe) {
+        dto.getIngredients().stream()
+                .map(ingredientRepository::findById)
+                .map(i -> i.orElseThrow(EntityNotFoundException::new))
+                .map(i -> new RecipeIngredient(recipe, i))
+                .forEach(recipeIngredientRepository::save);
+    }
+
     // 전체 레시피 조회
     public List<RecipeResponseDTO> findAll() {
         return recipeRepository.findAll()

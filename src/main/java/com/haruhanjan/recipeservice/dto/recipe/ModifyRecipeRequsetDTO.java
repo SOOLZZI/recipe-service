@@ -1,4 +1,4 @@
-package com.haruhanjan.recipeservice.dto;
+package com.haruhanjan.recipeservice.dto.recipe;
 
 import com.haruhanjan.recipeservice.entity.BaseTimeEntity;
 import com.haruhanjan.recipeservice.entity.RecipeIngredient;

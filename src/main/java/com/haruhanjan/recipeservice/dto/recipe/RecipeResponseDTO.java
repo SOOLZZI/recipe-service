@@ -1,17 +1,12 @@
-package com.haruhanjan.recipeservice.dto;
+package com.haruhanjan.recipeservice.dto.recipe;
 
+import com.haruhanjan.recipeservice.dto.recipeIngredient.RecipeIngredientResponseDTO;
+import com.haruhanjan.recipeservice.dto.recipeProcess.RecipeProcessResponseDTO;
 import com.haruhanjan.recipeservice.entity.BaseTimeEntity;
 import com.haruhanjan.recipeservice.entity.Recipe;
-import com.haruhanjan.recipeservice.entity.RecipeIngredient;
-import com.haruhanjan.recipeservice.entity.RecipeProcess;
-import com.haruhanjan.recipeservice.repository.RecipeRepository;
-import lombok.Builder;
 import lombok.Getter;
 
-import javax.persistence.Embedded;
-import javax.persistence.OneToMany;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +22,6 @@ public class RecipeResponseDTO {
     private List<RecipeProcessResponseDTO> processes;
 
     private LocalTime cookingTime;
-    private BaseTimeEntity baseTimeEntity;
 
     public RecipeResponseDTO(Recipe entity){
         this.id = entity.getId();
@@ -36,15 +30,14 @@ public class RecipeResponseDTO {
         this.description = entity.getDescription();
         this.writer = entity.getWriter();
 
-        this.ingredients = entity.getIngredients().stream()
+        this.ingredients = entity.getRecipeIngredients().stream()
                 .map(RecipeIngredientResponseDTO::new)
                 .collect(Collectors.toList());
 
-        this.processes = entity.getProcesses().stream()
+        this.processes = entity.getRecipeProcesses().stream()
                 .map(RecipeProcessResponseDTO::new)
                 .collect(Collectors.toList());
 
         this.cookingTime = entity.getCookingTime();
-        this.baseTimeEntity = entity.getBaseTimeEntity();
     }
 }

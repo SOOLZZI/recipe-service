@@ -27,11 +27,11 @@ public class Recipe {
 
     private String writer;
 
-    @OneToMany(mappedBy = "recipe")
-    private List<RecipeIngredient> ingredients = new ArrayList<>();
+    @OneToMany(mappedBy = "recipe", fetch=FetchType.LAZY)
+    private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
-    @OneToMany(mappedBy ="recipe")
-    private List<RecipeProcess> processes = new ArrayList<>();
+    @OneToMany(mappedBy ="recipe", fetch=FetchType.LAZY)
+    private List<RecipeProcess> recipeProcesses = new ArrayList<>();
 
     private LocalTime cookingTime;
 

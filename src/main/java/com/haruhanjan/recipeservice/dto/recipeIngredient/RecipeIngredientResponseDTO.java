@@ -1,4 +1,4 @@
-package com.haruhanjan.recipeservice.dto;
+package com.haruhanjan.recipeservice.dto.recipeIngredient;
 
 import com.haruhanjan.recipeservice.entity.RecipeIngredient;
 import lombok.Getter;

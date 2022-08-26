@@ -1,14 +1,10 @@
 package com.haruhanjan.recipeservice.service;
 
-import com.haruhanjan.recipeservice.dto.CreateIngredientRequestDTO;
-import com.haruhanjan.recipeservice.dto.CreateRecipeRequestDTO;
-import com.haruhanjan.recipeservice.dto.IngredientResponseDTO;
-import com.haruhanjan.recipeservice.dto.RecipeIngredientResponseDTO;
+import com.haruhanjan.recipeservice.dto.ingredient.CreateIngredientRequestDTO;
+import com.haruhanjan.recipeservice.dto.ingredient.IngredientResponseDTO;
 import com.haruhanjan.recipeservice.entity.Ingredient;
 import com.haruhanjan.recipeservice.entity.IngredientType;
-import com.haruhanjan.recipeservice.entity.Recipe;
 import com.haruhanjan.recipeservice.repository.IngredientRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

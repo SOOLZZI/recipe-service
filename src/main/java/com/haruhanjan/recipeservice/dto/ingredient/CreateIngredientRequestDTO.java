@@ -1,4 +1,4 @@
-package com.haruhanjan.recipeservice.dto;
+package com.haruhanjan.recipeservice.dto.ingredient;
 
 import com.haruhanjan.recipeservice.entity.Ingredient;
 import com.haruhanjan.recipeservice.entity.IngredientType;
