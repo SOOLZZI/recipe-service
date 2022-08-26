@@ -1,9 +1,6 @@
 package com.haruhanjan.recipeservice.dto;
 
-import com.haruhanjan.recipeservice.entity.BaseTimeEntity;
-import com.haruhanjan.recipeservice.entity.Recipe;
-import com.haruhanjan.recipeservice.entity.RecipeIngredient;
-import com.haruhanjan.recipeservice.entity.RecipeProcess;
+import com.haruhanjan.recipeservice.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,15 +10,15 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateRecipeRequestDTO {
 
-    @Getter
     private String title;
     private String description;
     private String writer;
-    private List<RecipeIngredient> ingredients;
+    private Ingredient ingredient;
     private List<RecipeProcess> processes;
     private LocalTime cookingTime;
     private BaseTimeEntity baseTimeEntity;
@@ -31,11 +28,10 @@ public class CreateRecipeRequestDTO {
                 .title(title)
                 .description(description)
                 .writer(writer)
-                .ingredients(ingredients)
+                .ingredients(ingredient.getName())
                 .processes(processes)
                 .cookingTime(cookingTime)
                 .baseTimeEntity(baseTimeEntity)
                 .build();
     }
-
 }
