@@ -13,7 +13,7 @@ public class RecipeIngredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "alcohol_id")
+    @Column(name = "recipe_ingredient_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

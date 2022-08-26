@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class RecipeResponseDTO {
@@ -22,8 +23,8 @@ public class RecipeResponseDTO {
     private String description;
     private String writer;
 
-    private List<RecipeIngredient> ingredients;
-    private List<RecipeProcess> processes;
+    private List<RecipeIngredientResponseDTO> ingredients;
+    private List<RecipeProcessResponseDTO> processes;
 
     private LocalTime cookingTime;
     private BaseTimeEntity baseTimeEntity;
@@ -34,8 +35,15 @@ public class RecipeResponseDTO {
         this.title = entity.getTitle();
         this.description = entity.getDescription();
         this.writer = entity.getWriter();
-        this.ingredients = entity.getIngredients();
-        this.processes = entity.getProcesses();
+
+        this.ingredients = entity.getIngredients().stream()
+                .map(RecipeIngredientResponseDTO::new)
+                .collect(Collectors.toList());
+
+        this.processes = entity.getProcesses().stream()
+                .map(RecipeProcessResponseDTO::new)
+                .collect(Collectors.toList());
+
         this.cookingTime = entity.getCookingTime();
         this.baseTimeEntity = entity.getBaseTimeEntity();
     }

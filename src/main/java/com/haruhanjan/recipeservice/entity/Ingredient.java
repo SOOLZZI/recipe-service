@@ -1,14 +1,14 @@
 package com.haruhanjan.recipeservice.entity;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,5 +18,11 @@ public class Ingredient {
     private String name;
 
     @Enumerated(value = EnumType.STRING)
-    private IngedinetType ingedinetType;
+    private IngredientType ingredientType;
+
+    @Builder
+    public Ingredient(String name, IngredientType ingredientType) {
+        this.name = name;
+        this.ingredientType = ingredientType;
+    }
 }

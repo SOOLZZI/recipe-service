@@ -8,9 +8,9 @@ import lombok.Setter;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 
 @Setter
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateRecipeRequestDTO {
@@ -18,20 +18,19 @@ public class CreateRecipeRequestDTO {
     private String title;
     private String description;
     private String writer;
-    private Ingredient ingredient;
-    private List<RecipeProcess> processes;
+
+    @Getter
+    private List<Long> ingredients;
+    @Getter
+    private List<String> processes;
     private LocalTime cookingTime;
-    private BaseTimeEntity baseTimeEntity;
 
     public Recipe toEntity(){
         return Recipe.builder()
                 .title(title)
                 .description(description)
                 .writer(writer)
-                .ingredients(ingredient.getName())
-                .processes(processes)
                 .cookingTime(cookingTime)
-                .baseTimeEntity(baseTimeEntity)
                 .build();
     }
 }
