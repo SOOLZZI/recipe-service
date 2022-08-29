@@ -32,22 +32,25 @@ public class RecipeService {
 
         recipeRepository.save(recipe);
 
-        saveRecipeIngredient(dto, recipe);
-        saveRecipeProcess(dto, recipe);
+        saveRecipeIngredient(dto.getIngredients(), recipe);
+        saveRecipeProcess(dto.getProcesses(), recipe);
 
         return recipe.getId();
     }
 
-    private void saveRecipeProcess(CreateRecipeRequestDTO dto, Recipe recipe) {
-        List<String> processes = dto.getProcesses();
+    private void saveRecipeProcess(List<String> processes, Recipe recipe) {
+        //사과를 갈아오
+        // 배를 썰어요
+        // 감자를 쪄요
+        
         range(0,processes.size())
                 .mapToObj(i->
                         new RecipeProcess(i+1, processes.get(i), recipe))
                 .forEach(recipeProcessRepository::save);
     }
 
-    private void saveRecipeIngredient(CreateRecipeRequestDTO dto, Recipe recipe) {
-        dto.getIngredients().stream()
+    private void saveRecipeIngredient(List<Long> ingredients, Recipe recipe) {
+        ingredients.stream()
                 .map(ingredientRepository::findById)
                 .map(i -> i.orElseThrow(EntityNotFoundException::new))
                 .map(i -> new RecipeIngredient(recipe, i))
