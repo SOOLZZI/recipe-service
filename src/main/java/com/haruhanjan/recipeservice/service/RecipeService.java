@@ -39,10 +39,6 @@ public class RecipeService {
     }
 
     private void saveRecipeProcess(List<String> processes, Recipe recipe) {
-        //사과를 갈아오
-        // 배를 썰어요
-        // 감자를 쪄요
-        
         range(0,processes.size())
                 .mapToObj(i->
                         new RecipeProcess(i+1, processes.get(i), recipe))
