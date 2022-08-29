@@ -1,6 +1,7 @@
 package com.haruhanjan.recipeservice.service;
 
 import com.haruhanjan.recipeservice.dto.recipe.CreateRecipeRequestDTO;
+import com.haruhanjan.recipeservice.dto.recipe.ModifyRecipeRequsetDTO;
 import com.haruhanjan.recipeservice.dto.recipe.RecipeResponseDTO;
 import com.haruhanjan.recipeservice.entity.Recipe;
 import com.haruhanjan.recipeservice.entity.RecipeIngredient;
@@ -67,4 +68,13 @@ public class RecipeService {
                 .orElseThrow(EntityNotFoundException::new);
     }
 
+    public void deleteById(Long id) {
+        Recipe recipe = recipeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        recipe.delete();
+    }
+
+    public void modify(Long id, ModifyRecipeRequsetDTO dto) {
+        Recipe recipe = recipeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        recipe.modify(dto);
+    }
 }

@@ -1,4 +1,5 @@
 package com.haruhanjan.recipeservice.entity;
+import com.haruhanjan.recipeservice.dto.recipe.ModifyRecipeRequsetDTO;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Optional.ofNullable;
 
 @Entity
 @Builder
@@ -39,4 +42,15 @@ public class Recipe {
     @Builder.Default
     private BaseTimeEntity baseTimeEntity = new BaseTimeEntity();
 
+    public void modify(ModifyRecipeRequsetDTO dto) {
+        ofNullable(dto.getTitle()).ifPresent(t -> this.title = t);
+        ofNullable(dto.getDescription()).ifPresent(d -> this.description = d);
+        ofNullable(dto.getWriter()).ifPresent(w -> this.writer = w);
+        ofNullable(dto.getCookingTime()).ifPresent(ct -> this.cookingTime = ct);
+        baseTimeEntity.update();
+    }
+
+    public void delete() {
+        baseTimeEntity.delete();
+    }
 }
