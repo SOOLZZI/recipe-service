@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import static java.util.stream.IntStream.*;
 
@@ -68,11 +70,13 @@ public class RecipeService {
                 .orElseThrow(EntityNotFoundException::new);
     }
 
+    @Transactional
     public void deleteById(Long id) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         recipe.delete();
     }
 
+    @Transactional
     public void modify(Long id, ModifyRecipeRequsetDTO dto) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         recipe.modify(dto);
