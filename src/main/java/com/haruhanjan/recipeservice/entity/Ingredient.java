@@ -31,7 +31,6 @@ public class Ingredient {
     }
 
     @Embedded
-    @Builder.Default
     private BaseTimeEntity baseTimeEntity = new BaseTimeEntity();
 
     public void modify(ModifyIngredientRequestDto dto) {
