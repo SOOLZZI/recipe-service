@@ -1,6 +1,7 @@
 package com.haruhanjan.recipeservice.service;
 
 import com.haruhanjan.recipeservice.dto.recipe.CreateRecipeRequestDTO;
+import com.haruhanjan.recipeservice.dto.recipe.ModifyRecipeRequsetDTO;
 import com.haruhanjan.recipeservice.dto.recipe.RecipeResponseDTO;
 import com.haruhanjan.recipeservice.entity.Recipe;
 import com.haruhanjan.recipeservice.entity.RecipeIngredient;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import static java.util.stream.IntStream.*;
 
@@ -67,4 +70,15 @@ public class RecipeService {
                 .orElseThrow(EntityNotFoundException::new);
     }
 
+    @Transactional
+    public void deleteById(Long id) {
+        Recipe recipe = recipeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        recipe.delete();
+    }
+
+    @Transactional
+    public void modify(Long id, ModifyRecipeRequsetDTO dto) {
+        Recipe recipe = recipeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        recipe.modify(dto);
+    }
 }
