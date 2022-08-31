@@ -1,12 +1,9 @@
 package com.haruhanjan.recipeservice.service;
 
-import com.haruhanjan.recipeservice.dto.ingredient.CreateIngredientRequestDTO;
+import com.haruhanjan.recipeservice.dto.ingredient.IngredientRequestDTO;
 import com.haruhanjan.recipeservice.dto.ingredient.IngredientResponseDTO;
-import com.haruhanjan.recipeservice.dto.ingredient.ModifyIngredientRequestDto;
-import com.haruhanjan.recipeservice.dto.recipe.ModifyRecipeRequsetDTO;
 import com.haruhanjan.recipeservice.entity.Ingredient;
 import com.haruhanjan.recipeservice.entity.IngredientType;
-import com.haruhanjan.recipeservice.entity.Recipe;
 import com.haruhanjan.recipeservice.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +20,7 @@ public class IngredientService {
     private final IngredientRepository ingredientRepository;
 
     // 재료 생성
-    public Long create(CreateIngredientRequestDTO dto){
+    public Long create(IngredientRequestDTO dto){
         Ingredient ingredient = dto.toEntity();
         ingredientRepository.save(ingredient);
         return ingredient.getId();
@@ -58,7 +55,7 @@ public class IngredientService {
     }
 
     @Transactional
-    public void modify(Long id, ModifyIngredientRequestDto dto) {
+    public void modify(Long id, IngredientRequestDTO dto) {
         Ingredient ingredient = ingredientRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         ingredient.modify(dto);
     }

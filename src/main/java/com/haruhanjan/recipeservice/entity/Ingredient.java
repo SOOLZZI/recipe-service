@@ -1,13 +1,10 @@
 package com.haruhanjan.recipeservice.entity;
 
 
-import com.haruhanjan.recipeservice.dto.ingredient.ModifyIngredientRequestDto;
-import com.haruhanjan.recipeservice.dto.recipe.ModifyRecipeRequsetDTO;
+import com.haruhanjan.recipeservice.dto.ingredient.IngredientRequestDTO;
 import lombok.*;
 
 import javax.persistence.*;
-
-import static java.util.Optional.ofNullable;
 
 @Entity
 @Getter
@@ -33,9 +30,9 @@ public class Ingredient {
     @Embedded
     private BaseTimeEntity baseTimeEntity = new BaseTimeEntity();
 
-    public void modify(ModifyIngredientRequestDto dto) {
-        ofNullable(dto.getName()).ifPresent(n -> this.name = n);
-        ofNullable(dto.getIngredientType()).ifPresent(it -> this.ingredientType = it);
+    public void modify(IngredientRequestDTO dto) {
+        this.name = dto.getName();
+        this.ingredientType = dto.getIngredientType();
         baseTimeEntity.update();
     }
 
