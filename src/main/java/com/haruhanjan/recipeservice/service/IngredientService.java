@@ -10,6 +10,7 @@ import com.haruhanjan.recipeservice.entity.Recipe;
 import com.haruhanjan.recipeservice.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -50,11 +51,13 @@ public class IngredientService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void deleteById(Long id) {
         Ingredient ingredient = ingredientRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         ingredient.delete();
     }
 
+    @Transactional
     public void modify(Long id, ModifyIngredientRequestDto dto) {
         Ingredient ingredient = ingredientRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         ingredient.modify(dto);

@@ -22,7 +22,7 @@ public class IngredientController {
     @GetMapping
     public ResponseEntity<List<IngredientResponseDTO>> readAll(){
         List<IngredientResponseDTO> result = ingredientService.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping
