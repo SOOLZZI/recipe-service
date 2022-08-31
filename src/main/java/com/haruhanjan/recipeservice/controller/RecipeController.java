@@ -31,9 +31,9 @@ public class RecipeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Void> patch(@PathVariable Long id,
-                                      @RequestBody ModifyRecipeRequsetDTO dto) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> put(@PathVariable Long id,
+                                      @RequestBody RecipeResponseDTO dto) {
         recipeService.modify(id, dto);
         return ResponseEntity.ok().build();
     }
