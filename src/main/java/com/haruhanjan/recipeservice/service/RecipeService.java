@@ -1,7 +1,6 @@
 package com.haruhanjan.recipeservice.service;
 
-import com.haruhanjan.recipeservice.dto.recipe.CreateRecipeRequestDTO;
-import com.haruhanjan.recipeservice.dto.recipe.ModifyRecipeRequsetDTO;
+import com.haruhanjan.recipeservice.dto.recipe.RecipeRequestDTO;
 import com.haruhanjan.recipeservice.dto.recipe.RecipeResponseDTO;
 import com.haruhanjan.recipeservice.entity.Recipe;
 import com.haruhanjan.recipeservice.entity.RecipeIngredient;
@@ -30,7 +29,7 @@ public class RecipeService {
     private final RecipeIngredientRepository recipeIngredientRepository;
 
     // 레시피 작성
-    public Long save(CreateRecipeRequestDTO dto){
+    public Long save(RecipeRequestDTO dto){
         Recipe recipe = dto.toEntity();
 
         recipeRepository.save(recipe);
@@ -77,7 +76,7 @@ public class RecipeService {
     }
 
     @Transactional
-    public void modify(Long id, ModifyRecipeRequsetDTO dto) {
+    public void modify(Long id, RecipeRequestDTO dto) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         recipe.modify(dto);
     }

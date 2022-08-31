@@ -11,9 +11,10 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateRecipeRequestDTO {
+public class RecipeRequestDTO {
 
     @NotNull
     private String title;
@@ -22,10 +23,8 @@ public class CreateRecipeRequestDTO {
     @NotNull
     private String writer;
 
-    @Getter
     @NotNull
     private List<Long> ingredients;
-    @Getter
     @NotNull
     private List<String> processes;
     @NotNull

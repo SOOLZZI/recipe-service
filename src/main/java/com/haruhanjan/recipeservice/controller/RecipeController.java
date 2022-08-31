@@ -1,7 +1,6 @@
 package com.haruhanjan.recipeservice.controller;
 
-import com.haruhanjan.recipeservice.dto.recipe.CreateRecipeRequestDTO;
-import com.haruhanjan.recipeservice.dto.recipe.ModifyRecipeRequsetDTO;
+import com.haruhanjan.recipeservice.dto.recipe.RecipeRequestDTO;
 import com.haruhanjan.recipeservice.dto.recipe.RecipeResponseDTO;
 import com.haruhanjan.recipeservice.service.RecipeService;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +25,14 @@ public class RecipeController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> create(@RequestBody @Valid CreateRecipeRequestDTO dto) {
+    public ResponseEntity<Long> create(@RequestBody @Valid RecipeRequestDTO dto) {
         Long result = recipeService.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> put(@PathVariable Long id,
-                                      @RequestBody RecipeResponseDTO dto) {
+                                      @RequestBody @Valid RecipeRequestDTO dto) {
         recipeService.modify(id, dto);
         return ResponseEntity.ok().build();
     }
