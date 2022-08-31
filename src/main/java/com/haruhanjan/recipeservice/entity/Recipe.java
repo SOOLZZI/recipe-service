@@ -43,7 +43,6 @@ public class Recipe {
     public void modify(RecipeRequestDTO dto) {
         this.title = dto.getTitle();
         this.description = dto.getDescription();
-        this.writer = dto.getWriter();
         this.cookingTime = dto.getCookingTime();
         baseTimeEntity.update();
     }
