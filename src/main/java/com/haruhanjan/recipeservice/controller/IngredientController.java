@@ -1,8 +1,7 @@
 package com.haruhanjan.recipeservice.controller;
 
-import com.haruhanjan.recipeservice.dto.ingredient.CreateIngredientRequestDTO;
+import com.haruhanjan.recipeservice.dto.ingredient.IngredientRequestDTO;
 import com.haruhanjan.recipeservice.dto.ingredient.IngredientResponseDTO;
-import com.haruhanjan.recipeservice.dto.ingredient.ModifyIngredientRequestDto;
 import com.haruhanjan.recipeservice.service.IngredientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,14 +25,14 @@ public class IngredientController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> create(@RequestBody @Valid CreateIngredientRequestDTO dto) {
+    public ResponseEntity<Long> create(@RequestBody @Valid IngredientRequestDTO dto) {
         Long result = ingredientService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Void> patch(@PathVariable Long id,
-                                      @RequestBody ModifyIngredientRequestDto dto) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> put(@PathVariable Long id,
+                                      @RequestBody @Valid IngredientRequestDTO dto) {
         ingredientService.modify(id, dto);
         return ResponseEntity.ok().build();
     }
