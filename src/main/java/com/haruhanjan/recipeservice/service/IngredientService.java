@@ -2,11 +2,15 @@ package com.haruhanjan.recipeservice.service;
 
 import com.haruhanjan.recipeservice.dto.ingredient.CreateIngredientRequestDTO;
 import com.haruhanjan.recipeservice.dto.ingredient.IngredientResponseDTO;
+import com.haruhanjan.recipeservice.dto.ingredient.ModifyIngredientRequestDto;
+import com.haruhanjan.recipeservice.dto.recipe.ModifyRecipeRequsetDTO;
 import com.haruhanjan.recipeservice.entity.Ingredient;
 import com.haruhanjan.recipeservice.entity.IngredientType;
+import com.haruhanjan.recipeservice.entity.Recipe;
 import com.haruhanjan.recipeservice.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -45,5 +49,17 @@ public class IngredientService {
         return ingredientRepository.findAllByIngredientType(type)
                 .stream().map(IngredientResponseDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        Ingredient ingredient = ingredientRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        ingredient.delete();
+    }
+
+    @Transactional
+    public void modify(Long id, ModifyIngredientRequestDto dto) {
+        Ingredient ingredient = ingredientRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        ingredient.modify(dto);
     }
 }
