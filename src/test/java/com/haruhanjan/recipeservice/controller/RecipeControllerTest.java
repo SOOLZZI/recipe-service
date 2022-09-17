@@ -75,8 +75,15 @@ class RecipeControllerTest {
         result.andExpect(status().isOk())
                 .andDo(document("get-recipe-list",
                         requestFields(
-                                fieldWithPath("id").type(JsonFieldType.ARRAY).description("tests"),
-                                fieldWithPath("test2").type(JsonFieldType.STRING).description("qewr")
+                                fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("레시피 ID"),
+                                fieldWithPath("[].title").type(JsonFieldType.STRING).description("레시피 이름"),
+                                fieldWithPath("[].description").type(JsonFieldType.STRING).description("레시피 설명"),
+                                fieldWithPath("[].writer").type(JsonFieldType.STRING).description("작성자"),
+                                fieldWithPath("[].ingredients.[].id").type(JsonFieldType.NUMBER).description("재료 ID"),
+                                fieldWithPath("[].ingredients.[].name").type(JsonFieldType.STRING).description("재료명"),
+                                fieldWithPath("[].processes.[].cookingOrder").type(JsonFieldType.NUMBER).description("조리 순서"),
+                                fieldWithPath("[].processes.[].description").type(JsonFieldType.STRING).description("조리방법"),
+                                fieldWithPath("[].cookingTime").type(JsonFieldType.STRING).description("총 요리 시간")
                         )
                 ));
     }
