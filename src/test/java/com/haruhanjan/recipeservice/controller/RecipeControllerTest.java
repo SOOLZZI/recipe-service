@@ -26,8 +26,7 @@ import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -66,15 +65,15 @@ class RecipeControllerTest {
         //when
         ResultActions result = mockMvc.perform(
                 get("/api/recipes")
-                        .content(objectMapper.writeValueAsString(list))
-                        .contentType(MediaType.APPLICATION_JSON)
+                        //.content(objectMapper.writeValueAsString(list))
+                       // .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
         );
 
         //then
         result.andExpect(status().isOk())
                 .andDo(document("get-recipe-list",
-                        requestFields(
+                        responseFields(
                                 fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("레시피 ID"),
                                 fieldWithPath("[].title").type(JsonFieldType.STRING).description("레시피 이름"),
                                 fieldWithPath("[].description").type(JsonFieldType.STRING).description("레시피 설명"),
