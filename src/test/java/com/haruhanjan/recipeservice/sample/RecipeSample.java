@@ -1,5 +1,6 @@
 package com.haruhanjan.recipeservice.sample;
 
+import com.haruhanjan.recipeservice.dto.recipe.RecipeRequestDTO;
 import com.haruhanjan.recipeservice.dto.recipe.RecipeResponseDTO;
 import com.haruhanjan.recipeservice.entity.*;
 
@@ -60,5 +61,21 @@ public class RecipeSample {
         process.setId(random.nextLong());
 
         return process;
+    }
+
+    public RecipeRequestDTO getRecipeRequestDTO() {
+        List<Long> ingredients = new ArrayList<>();
+        ingredients.add(getIngredient().getId());
+        ingredients.add(getIngredient().getId());
+        ingredients.add(getIngredient().getId());
+
+        List<String> processes = new ArrayList<>();
+        processes.add("프로세스1");
+        processes.add("프로세스2");
+        processes.add("프로세스3");
+
+
+        return new RecipeRequestDTO("타이틀", "설명", "작성자", ingredients, processes, LocalTime.now());
+
     }
 }

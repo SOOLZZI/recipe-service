@@ -9,20 +9,19 @@ Always0ne;
 :operation-curl-request-title: Example request
 :operation-http-response-title: Example response
 
-[[get-recipe-list]]
-=== 레시피 전체 조회
 
-==== HTTP request
-include::{snippets}/get-recipe-list/http-request.adoc[]
+== 레시피 전체 조회 ==
 
-==== request field
-include::{snippets}/get-recipe-list/request-body.adoc[]
+operation::get-recipe-list[snippets='http-request,request-fields,http-response,response-fields']
 
-==== HTTP response
-include::{snippets}/get-recipe-list/response-body.adoc[]
+== 레시피 생성 ==
 
-==== response field
-include::{snippets}/get-recipe-list/response-fields.adoc[]
+operation::create-recipe[snippets='http-request,request-fields,http-response,response-fields']
 
+== 레시피 수정 ==
 
-//operation::get-recipe-list[snippets='http-request,request-fields,http-response,response-fields']
+operation::update-recipe[snippets='http-request,request-fields,http-response']
+
+== 레시피 삭제 ==
+
+operation::delete-recipe[snippets='http-request,http-response']
