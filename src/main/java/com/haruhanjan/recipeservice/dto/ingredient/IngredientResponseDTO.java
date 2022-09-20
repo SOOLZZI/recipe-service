@@ -1,7 +1,9 @@
 package com.haruhanjan.recipeservice.dto.ingredient;
 
 import com.haruhanjan.recipeservice.entity.Ingredient;
+import lombok.Getter;
 
+@Getter
 public class IngredientResponseDTO {
     private Long id;
     private String name;

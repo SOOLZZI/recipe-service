@@ -9,10 +9,10 @@ Always0ne;
 :operation-curl-request-title: Example request
 :operation-http-response-title: Example response
 
-
+= 레시피 =
 == 레시피 전체 조회 ==
 
-operation::get-recipe-list[snippets='http-request,request-fields,http-response,response-fields']
+operation::get-recipe-list[snippets='http-request,http-response,response-fields']
 
 == 레시피 생성 ==
 
@@ -25,3 +25,18 @@ operation::update-recipe[snippets='http-request,request-fields,http-response']
 == 레시피 삭제 ==
 
 operation::delete-recipe[snippets='http-request,http-response']
+
+= 재료 =
+
+== 재료 전체 조회 ==
+operation::get-ingredient-list[snippets='http-request,http-response,response-fields']
+
+== 재료 추가 ==
+operation::create-ingredient[snippets='http-request,request-fields,http-response,response-fields']
+
+== 재료 수정 ==
+operation::update-ingredient[snippets='http-request,request-fields,http-response']
+
+
+== 재료 삭제 ==
+operation::delete-ingredient[snippets='http-request,http-response']
