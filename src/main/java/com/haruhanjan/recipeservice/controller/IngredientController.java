@@ -1,5 +1,6 @@
 package com.haruhanjan.recipeservice.controller;
 
+import com.haruhanjan.recipeservice.dto.ingredient.IngredientIdResponseDTO;
 import com.haruhanjan.recipeservice.dto.ingredient.IngredientRequestDTO;
 import com.haruhanjan.recipeservice.dto.ingredient.IngredientResponseDTO;
 import com.haruhanjan.recipeservice.service.IngredientService;
@@ -25,9 +26,9 @@ public class IngredientController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> create(@RequestBody @Valid IngredientRequestDTO dto) {
+    public ResponseEntity<IngredientIdResponseDTO> create(@RequestBody @Valid IngredientRequestDTO dto) {
         Long result = ingredientService.create(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new IngredientIdResponseDTO(result));
     }
 
     @PutMapping("/{id}")
